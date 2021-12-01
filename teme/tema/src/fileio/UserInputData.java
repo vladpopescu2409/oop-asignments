@@ -1,6 +1,7 @@
 package fileio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,6 +26,45 @@ public final class UserInputData {
      * Movies added to favorites
      */
     private final ArrayList<String> favoriteMovies;
+    /**
+     * filme recenziate
+     */
+    private Map<String, Float> ratedMovies;
+    /**
+     * getterul pentru ratedMovies
+     */
+
+    public Map<String, Float> getRatedMovies() {
+        return ratedMovies;
+    }
+
+
+    public void makeRatedMovies() {
+        this.ratedMovies = new HashMap<>();
+    }
+
+
+    public void makeRatedShows() {
+        this.ratedShows = new HashMap<>();
+    }
+
+    public Map<String, Float> getRatedShows() {
+        return ratedShows;
+    }
+
+    private Map<String, Float> ratedShows;
+
+    public void rateMovie(final String name, final Float grade) {
+        this.ratedMovies.put(name, grade);
+    }
+
+    public void rateShow(final String name, final Float grade) {
+        this.ratedShows.replace(name, grade);
+    }
+
+    public void adaugaFav(final String name) {
+        this.favoriteMovies.add(name);
+    }
 
     public UserInputData(final String username, final String subscriptionType,
                          final Map<String, Integer> history,

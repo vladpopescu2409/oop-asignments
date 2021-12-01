@@ -2,7 +2,9 @@ package main;
 
 import checker.Checkstyle;
 import checker.Checker;
+import commands.Command;
 import common.Constants;
+import fileio.ActionInputData;
 import fileio.Input;
 import fileio.InputLoader;
 import fileio.Writer;
@@ -69,9 +71,15 @@ public final class Main {
 
         Writer fileWriter = new Writer(filePath2);
         JSONArray arrayResult = new JSONArray();
-
         //TODO add here the entry point to your implementation
-
+        for (ActionInputData inputData : input.getCommands()
+        ) {  // in functie de tipul actiunii, cream o instanta a unei clase
+            // specifice si apelam functia necesara
+            if (inputData.getActionType().compareTo("command") == 0) {
+                Command comanda = new Command(input);
+                comanda.run(inputData, arrayResult, fileWriter);
+            }
+        }
         fileWriter.closeJSON(arrayResult);
     }
 }
